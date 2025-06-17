@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>姬天祥 - 科技感个人简历</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0ff;
+            --secondary: #6a11cb;
+            --dark: #0a0a1a;
+            --darker: #050510;
+            --card-bg: rgba(15, 23, 42, 0.7);
+            --text: #e2e8f0;
+            --accent: #ff2a6d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--text);
+            font-family: 'Exo 2', sans-serif;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(106, 17, 203, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 20%);
+            z-index: -2;
+        }
+        
+        /* 网格背景 */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(10, 25, 47, 0.2) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(10, 25, 47, 0.2) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+        }
+        
+        /* 动画粒子 */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--primary);
+            opacity: 0.6;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            text-align: center;
+            padding: 80px 20px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(106, 17, 203, 0.2), rgba(0, 255, 255, 0.1));
+            clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+            z-index: -1;
+        }
+        
+        .avatar {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 25px;
+            position: relative;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.5s ease;
+        }
+        
+        .avatar:hover {
+            transform: scale(1.05);
+        }
+        
+        .avatar-inner {
+            width: 150px;
+            height: 150px;
+            background: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 70px;
+            font-weight: bold;
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+        
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+        
+        .title {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            color: var(--text);
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .title span {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            padding: 12px 20px;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 30px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
+        }
+        
+        .contact-item i {
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+        
+        /* 卡片样式 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+            z-index: -1;
+            border-radius: 17px;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 255, 255, 0.2);
+        }
+        
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        h2::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), transparent);
+        }
+        
+        /* 个人信息样式 */
+        .personal-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .info-item {
+            display: flex;
+            gap: 10px;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .info-item:hover {
+            background: rgba(0, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 80px;
+        }
+        
+        /* 教育经历样式 */
+        .education {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        }
+        
+        .education:last-child {
+            border-bottom: none;
+        }
+        
+        .edu-content h3 {
+            font-size: 1.4rem;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+        
+        .edu-content p {
+            color: var(--primary);
+            font-weight: 300;
+        }
+        
+        .date {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1.1rem;
+            min-width: 180px;
+            text-align: right;
+        }
+        
+        /* 技能样式 */
+        .skills-container {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .skill-item {
+            margin-bottom: 20px;
+        }
+        
+        .skill-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            border-radius: 4px;
+            position: relative;
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+        
+        .skill-tag {
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-tag:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+        }
+        
+        /* 自我评价样式 */
+        .self-eval {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .self-eval p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+            margin-top: 30px;
+            font-size: 1rem;
+            color: var(--text);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .education {
+                flex-direction: column;
+            }
+            
+            .date {
+                text-align: left;
+                margin-top: 10px;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <!-- 背景元素 -->
+    <div class="grid-bg"></div>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <header>
+            <div class="avatar">
+                <div class="avatar-inner">姬</div>
+            </div>
+            <h1>姬天祥</h1>
+            <div class="title">计算机科学 | <span>本科在读</span></div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>18014079524</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>2604813278@qq.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>江苏省镇江市</span>
+                </div>
+            </div>
+        </header>
+        
+        <div class="card-grid">
+            <div class="card animate">
+                <h2><i class="fas fa-user-astronaut"></i> 个人信息</h2>
+                <div class="personal-info">
+                    <div class="info-item">
+                        <span class="info-label">性别：</span>
+                        <span>男</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">年龄：</span>
+                        <span>19岁</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">户籍：</span>
+                        <span>江苏省徐州市邳州市</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">政治面貌：</span>
+                        <span>群众</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">民族：</span>
+                        <span>汉</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">身高：</span>
+                        <span>175cm</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">体重：</span>
+                        <span>60kg</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card animate delay-1">
+                <h2><i class="fas fa-graduation-cap"></i> 教育经历</h2>
+                <div class="education">
+                    <div class="edu-content">
+                        <h3>计算机类 | 本科</h3>
+                        <p>高等数学 · 程序设计基础 · 数据结构 · 算法分析</p>
+                    </div>
+                    <div class="date">2024.09 - 至今</div>
+                </div>
+                <div class="education">
+                    <div class="edu-content">
+                        <h3>核心课程</h3>
+                        <p>计算机网络 · 操作系统 · 数据库系统 · 软件工程</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card animate delay-2">
+                <h2><i class="fas fa-laptop-code"></i> 专业技能</h2>
+                <div class="skills-container">
+                    <div class="skill-item">
+                        <div class="skill-title">
+                            <span>团队协作能力</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                        <p style="margin-top: 10px; color: #94a3b8;">良好的团队协作能力，能够有效沟通并推动项目进展</p>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-title">
+                            <span>C++ 编程</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                        <p style="margin-top: 10px; color: #94a3b8;">熟练掌握C++编程语言基础，具备良好的代码编写能力</p>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-title">
+                            <span>Office 办公软件</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                        <p style="margin-top: 10px; color: #94a3b8;">熟练掌握Office办公软件，能够高效处理文档、表格及演示文稿</p>
+                    </div>
+                    
+                    <div class="skill-tags">
+                        <div class="skill-tag">数据结构</div>
+                        <div class="skill-tag">算法设计</div>
+                        <div class="skill-tag">问题解决</div>
+                        <div class="skill-tag">文档编写</div>
+                        <div class="skill-tag">技术学习</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card animate delay-3">
+                <h2><i class="fas fa-stars"></i> 自我评价</h2>
+                <div class="self-eval">
+                    <p>本人性格开朗，积极向上，对工作学习抱有极大的热情。作为<span class="highlight">计算机专业</span>的学生，积极学习高等数学、程序设计基础等课程，培养了扎实的核心能力。</p>
+                    <p>在相关课程中，展现出良好的理解力和求知力，乐于接受挑战，积极参与各项活动。具备较强的学习能力和适应能力，善于在团队中协作，追求技术创新与实用性的平衡。</p>
+                    <p>对新技术保持高度敏感，持续关注行业动态，致力于将理论知识转化为实际应用解决方案。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 姬天祥 | 科技感个人简历 | 最后更新: 2025年6月17日</p>
+    </footer>
+    
+    <script>
+        // 创建粒子效果
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // 随机大小
+                const size = Math.random() * 3 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // 随机位置
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                
+                // 随机动画延迟
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // 初始化技能条动画
+        function animateSkills() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            skillBars.forEach(bar => {
+                // 重置宽度以触发动画
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 300);
+            });
+        }
+        
+        // 滚动动画
+        function initAnimations() {
+            const elements = document.querySelectorAll('.animate');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            elements.forEach(el => {
+                el.style.opacity = 0;
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(el);
+            });
+        }
+        
+        // 页面加载完成后执行
+        window.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            animateSkills();
+            initAnimations();
+        });
+    </script>
+</body>
+</html>
